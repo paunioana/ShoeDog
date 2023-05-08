@@ -1,5 +1,7 @@
 # ShoeDog
 Trail running shoes review app
+
 Schema table associations
 
-![image](https://user-images.githubusercontent.com/94004958/236898056-e30cacc1-6bfa-42e0-a239-dadffa84fd35.png)
+![Untitled (1)](https://user-images.githubusercontent.com/94004958/236898196-2bd16dd0-d955-4e04-9a32-9e296fd4993c.png)
+
