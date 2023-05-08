@@ -1,4 +1,4 @@
-package com.devmind.ShoeDog.models;
+package com.devmind.ShoeDog.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
