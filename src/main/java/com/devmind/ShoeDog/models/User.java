@@ -1,9 +1,10 @@
 package com.devmind.ShoeDog.models;
 
+import com.devmind.ShoeDog.security.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.NotNull;
+import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +31,13 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToMany(mappedBy = "review")
+    @OneToMany(mappedBy = "user")
     private Set<Review> user_reviews;
+
+    public User(Long id, String email, String encode, Role value) {
+        this.id = id;
+        this.email = email;
+        this.password = encode;
+        this.role = value;
+    }
 }

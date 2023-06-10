@@ -1,7 +1,9 @@
 package com.devmind.ShoeDog.models;
 
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.util.Set;
@@ -11,6 +13,7 @@ import java.util.Set;
 @Data
 public class Product {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
     String model;
     int year;
@@ -20,7 +23,8 @@ public class Product {
     @JoinColumn(name = "id_brand")
     public Brand brand;
 
-    @OneToMany(mappedBy = "review")
+    @OneToMany(mappedBy = "product")
+    @JsonIgnore
     public Set<Review> productReviews;
 
 

@@ -1,9 +1,10 @@
 package com.devmind.ShoeDog.models;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import lombok.Data;
 
 import java.util.Set;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Data
 public class Brand {
 
+    @Id
     Integer id;
     String name;
     @OneToMany(mappedBy = "brand")

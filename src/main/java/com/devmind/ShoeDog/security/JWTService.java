@@ -1,12 +1,10 @@
 package com.devmind.ShoeDog.security;
 
 import com.devmind.ShoeDog.models.User;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseCookie;
-
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
@@ -40,13 +38,13 @@ public class JWTService {
 
     public String generateTokenForUser(User user) {
         return Jwts.builder()
+                //.setPayload(user.getEmail())
                 .setSubject(user.getEmail())
                 .setIssuedAt(new Date())
                 .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }
-
 
     public String getEmailFromToken(String token) {
         return Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody().getSubject();

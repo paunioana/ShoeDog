@@ -1,4 +1,4 @@
-package com.devmind.ShoeDog.models;
+package com.devmind.ShoeDog.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

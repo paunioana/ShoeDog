@@ -1,6 +1,6 @@
 package com.devmind.ShoeDog.models;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Data
 public class Review {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
     @ManyToOne
     @JoinColumn(name = "id_product")
