@@ -8,6 +8,7 @@ public class ShoeDogApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ShoeDogApplication.class, args);
+
 	}
 
 }

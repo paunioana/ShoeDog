@@ -17,7 +17,6 @@ public class Product {
     Integer id;
     String model;
     int year;
-    String season;
 
     @ManyToOne
     @JoinColumn(name = "id_brand")

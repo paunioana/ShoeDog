@@ -2,7 +2,6 @@ package com.devmind.ShoeDog.models;
 
 import javax.persistence.*;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 
 @Entity
