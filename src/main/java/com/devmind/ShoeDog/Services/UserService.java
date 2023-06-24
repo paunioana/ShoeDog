@@ -52,7 +52,7 @@ public class UserService {
 
         return ResponseEntity.ok()
                 .header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-                .body(new LoginResponseDTO(userDetails.getEmail(), jwtCookie.getValue(), userDetails.getId(), role));
+                .body(new LoginResponseDTO(userDetails.getEmail(), jwtCookie.getValue(), role));
     }
 
     @Transactional
@@ -69,7 +69,7 @@ public class UserService {
         }
 
 
-        User user = new User(null, registerRequestDTO.getEmail(), encoder.encode(registerRequestDTO.getPassword()), Role.valueOf(role));
+        User user = new User(registerRequestDTO.getEmail(), encoder.encode(registerRequestDTO.getPassword()), Role.valueOf(role));
 
         userRepository.save(user);
         return ResponseEntity.ok("User registered successfully!");

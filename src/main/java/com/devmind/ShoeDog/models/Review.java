@@ -1,24 +1,27 @@
 package com.devmind.ShoeDog.models;
 
 import javax.persistence.*;
-import lombok.Data;
+
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
 
 @Entity
 @Table(name = "reviews")
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Integer id;
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "id_product")
-    public Product product;
+    private Product product;
     @ManyToOne
-    @JoinColumn(name = "id_user")
-    public User user;
-    String review_content;
-    String place;
-    int rating;
+    @JoinColumn(name = "user_email")
+    private User user;
+    private String review_content;
+    private String place;
+    private String rating;
 
 }

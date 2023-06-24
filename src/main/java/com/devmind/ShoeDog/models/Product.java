@@ -4,27 +4,28 @@ package com.devmind.ShoeDog.models;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
+import lombok.AllArgsConstructor;
 
+import lombok.NoArgsConstructor;
 import java.util.Set;
-
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "products")
-@Data
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    Integer id;
-    String model;
-    int year;
+    private Long id;
+    private String model;
+    private int year;
 
     @ManyToOne
     @JoinColumn(name = "id_brand")
-    public Brand brand;
+    private Brand brand;
 
     @OneToMany(mappedBy = "product")
     @JsonIgnore
-    public Set<Review> productReviews;
+    private Set<Review> productReviews;
 
 
 

@@ -1,13 +1,12 @@
 package com.devmind.ShoeDog.dtos;
 
-import com.devmind.ShoeDog.models.Product;
-import com.devmind.ShoeDog.models.User;
+import lombok.Data;
 
-import javax.persistence.*;
-
+@Data
 public class ReviewRequestDTO {
-    private Product product;
+    private Long product;
+    private Long brand;
     private String review_content;
-    private String place;
-    private int rating;
+    private String purchase_place;
+    private String rating;
 }

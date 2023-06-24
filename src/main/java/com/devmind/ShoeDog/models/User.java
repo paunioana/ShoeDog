@@ -6,7 +6,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
@@ -15,14 +15,12 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
+@Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
 public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     @NotEmpty
+    @Id
     private String email;
     @JsonIgnore
     @ToString.Exclude
@@ -34,10 +32,10 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Review> user_reviews;
 
-    public User(Long id, String email, String encode, Role value) {
-        this.id = id;
+    public User(String email, String encode, Role value) {
         this.email = email;
         this.password = encode;
         this.role = value;
     }
+
 }
