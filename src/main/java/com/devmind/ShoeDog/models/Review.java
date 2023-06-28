@@ -3,6 +3,7 @@ package com.devmind.ShoeDog.models;
 import javax.persistence.*;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "reviews")
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

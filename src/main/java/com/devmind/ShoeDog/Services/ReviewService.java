@@ -1,6 +1,5 @@
 package com.devmind.ShoeDog.Services;
 
-import com.devmind.ShoeDog.dtos.LoginResponseDTO;
 import com.devmind.ShoeDog.dtos.ReviewRequestDTO;
 import com.devmind.ShoeDog.models.Brand;
 import com.devmind.ShoeDog.models.Product;
@@ -11,7 +10,6 @@ import com.devmind.ShoeDog.repos.ProductRepository;
 import com.devmind.ShoeDog.repos.ReviewRepository;
 import com.devmind.ShoeDog.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -30,9 +28,8 @@ public class ReviewService {
     @Autowired
     private ReviewRepository reviewRepository;
 
-    public ResponseEntity<?> getAllBrands() {
-        return ResponseEntity.ok()
-                .body(brandRepository.findByOrderByName());
+    public List<Brand> getAllBrands() {
+        return brandRepository.findByOrderByName();
     }
 
     public ResponseEntity<?> getProductsByBrand(Long brandId) {

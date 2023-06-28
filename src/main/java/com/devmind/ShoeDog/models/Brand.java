@@ -5,6 +5,7 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Set;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Table(name = "brands")
 @AllArgsConstructor
 @NoArgsConstructor
+@Data
 public class Brand {
 
     @Id

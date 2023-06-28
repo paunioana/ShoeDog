@@ -6,12 +6,14 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 
+import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "products")
+@Data
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

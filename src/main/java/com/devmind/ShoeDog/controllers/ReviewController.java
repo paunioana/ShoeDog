@@ -2,15 +2,11 @@ package com.devmind.ShoeDog.controllers;
 
 import com.devmind.ShoeDog.Services.ReviewService;
 import com.devmind.ShoeDog.Services.UserService;
-import com.devmind.ShoeDog.dtos.LoginRequestDTO;
-import com.devmind.ShoeDog.dtos.RegisterRequestDTO;
 import com.devmind.ShoeDog.dtos.ReviewRequestDTO;
 import com.devmind.ShoeDog.models.Brand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/review")
@@ -23,7 +19,8 @@ public class ReviewController {
     @GetMapping("/brands")
     @CrossOrigin
     public ResponseEntity<?> getAllBrands() {
-        return reviewService.getAllBrands();
+        return ResponseEntity.ok()
+                .body(reviewService.getAllBrands());
     }
 
     @GetMapping("/products")

@@ -48,7 +48,7 @@ public class SecurityConfiguration {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers(HttpMethod.POST, "/api/teacher/**").hasAnyAuthority("ADMIN")
                 .and()
-                .authorizeRequests().antMatchers("/review/**").hasAnyAuthority("ADMIN", "USER")
+                .authorizeRequests().antMatchers("/review/**").hasAnyAuthority("USER")
                 .and()
                 .authorizeRequests().antMatchers("/user/**").permitAll()
                 .anyRequest().authenticated()
