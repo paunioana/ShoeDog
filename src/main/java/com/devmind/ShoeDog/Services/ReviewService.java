@@ -12,6 +12,7 @@ import com.devmind.ShoeDog.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -37,14 +38,15 @@ public class ReviewService {
                 .body(productRepository.findAllByBrandIdOrderByModel(brandId));
     }
 
+    @Transactional
     public ResponseEntity<?>  addReview(ReviewRequestDTO reviewRequestDTO, String email) {
         User user = userRepository.findUserByEmail(email).orElseThrow();
         System.out.println(user);
         Product repo_product = productRepository.findProductById(reviewRequestDTO.getProduct()).orElseThrow();
 
         Review review = new Review(null,repo_product, user,reviewRequestDTO.getReview_content(), reviewRequestDTO.getPurchase_place(), reviewRequestDTO.getRating());
-        return ResponseEntity.ok()
-                .body(reviewRepository.save(review));
+        reviewRepository.save(review);
+        return ResponseEntity.ok("Review added successfully!");
     }
 
 

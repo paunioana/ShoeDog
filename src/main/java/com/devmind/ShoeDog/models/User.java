@@ -22,6 +22,11 @@ public class User {
     @NotEmpty
     @Id
     private String email;
+
+    private String firstName;
+
+    private String lastName;
+    private String about;
     @JsonIgnore
     @ToString.Exclude
     private String password;
@@ -32,10 +37,13 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Review> user_reviews;
 
-    public User(String email, String encode, Role value) {
+    public User(String email, String firstName, String lastName, String encode, Role value) {
         this.email = email;
         this.password = encode;
         this.role = value;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.about = "";
     }
 
 }

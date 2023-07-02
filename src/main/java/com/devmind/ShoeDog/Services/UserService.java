@@ -1,7 +1,6 @@
 package com.devmind.ShoeDog.Services;
-import com.devmind.ShoeDog.dtos.LoginRequestDTO;
-import com.devmind.ShoeDog.dtos.LoginResponseDTO;
-import com.devmind.ShoeDog.dtos.RegisterRequestDTO;
+import com.devmind.ShoeDog.dtos.*;
+import com.devmind.ShoeDog.repos.ReviewRepository;
 import com.devmind.ShoeDog.security.Role;
 import com.devmind.ShoeDog.models.User;
 import com.devmind.ShoeDog.repos.UserRepository;
@@ -21,7 +20,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.security.core.GrantedAuthority;
 
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Service
@@ -37,6 +35,9 @@ public class UserService {
 
     @Autowired
     JWTService jwtHelper;
+
+    @Autowired
+    ReviewRepository reviewRepository;
 
     public ResponseEntity<?> login(@RequestBody LoginRequestDTO loginRequest) {
 
@@ -69,9 +70,25 @@ public class UserService {
         }
 
 
-        User user = new User(registerRequestDTO.getEmail(), encoder.encode(registerRequestDTO.getPassword()), Role.valueOf(role));
+        User user = new User(registerRequestDTO.getEmail(), registerRequestDTO.getFirstName(), registerRequestDTO.getLastName(), encoder.encode(registerRequestDTO.getPassword()), Role.valueOf(role));
 
         userRepository.save(user);
         return ResponseEntity.ok("User registered successfully!");
+    }
+
+    public UserDetailsResponseDTO getUserDetails(String email) {
+        User user = userRepository.findUserByEmail(email).orElseThrow();
+        Integer no_reviews = reviewRepository.countByUserEmail(email);
+        UserDetailsResponseDTO dto = new UserDetailsResponseDTO(user.getEmail(), user.getFirstName(), user.getLastName(), no_reviews, user.getAbout());
+        return dto;
+    }
+
+    @Transactional
+    public UserDetailsResponseDTO updateUserDetails(UserDetailsRequestDTO userDetailsRequestDTO) {
+        User user = userRepository.findUserByEmail(userDetailsRequestDTO.getEmail()).orElseThrow();
+        Integer no_reviews = reviewRepository.countByUserEmail(userDetailsRequestDTO.getEmail());
+        UserDetailsResponseDTO dto = new UserDetailsResponseDTO(user.getEmail(), user.getFirstName(), user.getLastName(), no_reviews, user.getAbout());
+        return dto;
+        //unfinished
     }
 }

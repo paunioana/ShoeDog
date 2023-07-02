@@ -1,16 +1,19 @@
 package com.devmind.ShoeDog.dtos;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class RegisterRequestDTO {
+@AllArgsConstructor
+public class UserDetailsRequestDTO {
     private String email;
 
     private String firstName;
 
     private String lastName;
-    private String role;
-    private String password;
+
+    private Integer no_reviews;
+    private String about;
 }
