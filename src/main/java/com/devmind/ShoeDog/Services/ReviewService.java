@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -44,10 +45,13 @@ public class ReviewService {
         System.out.println(user);
         Product repo_product = productRepository.findProductById(reviewRequestDTO.getProduct()).orElseThrow();
 
-        Review review = new Review(null,repo_product, user,reviewRequestDTO.getReview_content(), reviewRequestDTO.getPurchase_place(), reviewRequestDTO.getRating());
+        Review review = new Review(null,repo_product, user,reviewRequestDTO.getReview_content(), reviewRequestDTO.getPurchase_place(), reviewRequestDTO.getRating(), new Date());
         reviewRepository.save(review);
         return ResponseEntity.ok("Review added successfully!");
     }
 
+    public List<Review> getAllReviews() {
+        return reviewRepository.findByOrderByProductModel();
+    }
 
 }

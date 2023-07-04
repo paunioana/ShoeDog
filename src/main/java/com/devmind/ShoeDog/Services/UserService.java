@@ -7,6 +7,7 @@ import com.devmind.ShoeDog.repos.UserRepository;
 import com.devmind.ShoeDog.security.JWTService;
 import com.devmind.ShoeDog.security.UserDetailsImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
@@ -20,6 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.security.core.GrantedAuthority;
 
+
+import java.util.Date;
 import java.util.stream.Collectors;
 
 @Service
@@ -63,14 +66,13 @@ public class UserService {
         }
 
         String role = registerRequestDTO.getRole();
-        // TODO: add more sanity checks (email, password, etc.)
 
         if (role == null || !(role.toUpperCase().equals("USER") || role.toUpperCase().equals("ADMIN"))) {
             throw new RuntimeException("Invalid role");
         }
 
 
-        User user = new User(registerRequestDTO.getEmail(), registerRequestDTO.getFirstName(), registerRequestDTO.getLastName(), encoder.encode(registerRequestDTO.getPassword()), Role.valueOf(role));
+        User user = new User(registerRequestDTO.getEmail(), registerRequestDTO.getFirstName(), registerRequestDTO.getLastName(), encoder.encode(registerRequestDTO.getPassword()), Role.valueOf(role), new Date());
 
         userRepository.save(user);
         return ResponseEntity.ok("User registered successfully!");
@@ -83,12 +85,15 @@ public class UserService {
         return dto;
     }
 
-    @Transactional
+    @Modifying
     public UserDetailsResponseDTO updateUserDetails(UserDetailsRequestDTO userDetailsRequestDTO) {
         User user = userRepository.findUserByEmail(userDetailsRequestDTO.getEmail()).orElseThrow();
         Integer no_reviews = reviewRepository.countByUserEmail(userDetailsRequestDTO.getEmail());
+        user.setFirstName(userDetailsRequestDTO.getFirstName());
+        user.setLastName(userDetailsRequestDTO.getLastName());
+        user.setAbout(userDetailsRequestDTO.getAbout());
+        userRepository.save(user);
         UserDetailsResponseDTO dto = new UserDetailsResponseDTO(user.getEmail(), user.getFirstName(), user.getLastName(), no_reviews, user.getAbout());
         return dto;
-        //unfinished
     }
 }

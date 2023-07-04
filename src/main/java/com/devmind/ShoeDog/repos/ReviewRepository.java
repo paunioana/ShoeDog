@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     Integer countByUserEmail(String email);
+    List<Review> findByOrderByProductModel();
 }

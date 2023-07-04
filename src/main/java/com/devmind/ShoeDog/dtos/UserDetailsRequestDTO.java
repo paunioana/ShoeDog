@@ -14,6 +14,5 @@ public class UserDetailsRequestDTO {
 
     private String lastName;
 
-    private Integer no_reviews;
     private String about;
 }

@@ -1,6 +1,7 @@
 package com.devmind.ShoeDog.models;
 
 import com.devmind.ShoeDog.security.Role;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -10,6 +11,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.Date;
 import java.util.Set;
 
 
@@ -35,15 +37,34 @@ public class User {
     private Role role;
 
     @OneToMany(mappedBy = "user")
+    @JsonBackReference
     private Set<Review> user_reviews;
 
-    public User(String email, String firstName, String lastName, String encode, Role value) {
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setAbout(String about) {
+        this.about = about;
+    }
+
+    @Column(name = "subscribed_on")
+    @Temporal(TemporalType.DATE)
+    private Date subscribedOn;
+
+    public User(String email, String firstName, String lastName, String encode, Role value, Date subscribedOn) {
         this.email = email;
         this.password = encode;
         this.role = value;
         this.firstName = firstName;
         this.lastName = lastName;
         this.about = "";
+        this.subscribedOn = subscribedOn;
     }
+
 
 }

@@ -3,7 +3,7 @@ package com.devmind.ShoeDog.models;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 
 import lombok.Data;
@@ -26,7 +26,7 @@ public class Product {
     private Brand brand;
 
     @OneToMany(mappedBy = "product")
-    @JsonIgnore
+    @JsonBackReference
     private Set<Review> productReviews;
 
 

@@ -35,6 +35,13 @@ public class ReviewController {
         return reviewService.addReview(reviewRequestDTO, email);
     }
 
+    @GetMapping("/all")
+    @CrossOrigin
+    public ResponseEntity<?> getAllReviews() {
+        return ResponseEntity.ok()
+                .body(reviewService.getAllReviews());
+    }
+
 
 }
 

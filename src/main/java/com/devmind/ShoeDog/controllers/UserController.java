@@ -38,7 +38,7 @@ public class UserController {
 
     @PostMapping("/update")
     @CrossOrigin
-    public ResponseEntity<?> updateUSerDetails(@RequestBody UserDetailsRequestDTO userDetailsRequestDTO) {
+    public ResponseEntity<?> updateUserDetails(@RequestBody UserDetailsRequestDTO userDetailsRequestDTO) {
         return ResponseEntity.ok()
                 .body(userService.updateUserDetails(userDetailsRequestDTO));
     }
