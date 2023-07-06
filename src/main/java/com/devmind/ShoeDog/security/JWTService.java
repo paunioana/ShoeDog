@@ -15,7 +15,7 @@ public class JWTService {
     @Value("${jwt.secret}")
     private String jwtSecret;
 
-    @Value("${jwt.accessTokenValiditityMS}")
+    @Value("7200000")
     private int jwtExpirationMs;
 
     @Value("${jwt.cookieName}")

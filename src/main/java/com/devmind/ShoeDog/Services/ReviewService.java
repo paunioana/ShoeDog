@@ -54,4 +54,11 @@ public class ReviewService {
         return reviewRepository.findByOrderByProductModel();
     }
 
+    @Transactional
+    public ResponseEntity<?> deleteReview(Long reviewId) {
+        Review rev = reviewRepository.findReviewById(reviewId).orElseThrow();
+        return ResponseEntity.ok()
+                .body(reviewRepository.deleteReviewById(reviewId));
+    }
+
 }

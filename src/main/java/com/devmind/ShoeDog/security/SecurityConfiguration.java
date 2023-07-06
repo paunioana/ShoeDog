@@ -46,9 +46,9 @@ public class SecurityConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers(HttpMethod.POST, "/api/teacher/**").hasAnyAuthority("ADMIN")
+                .authorizeRequests().antMatchers("/review/all").permitAll()
                 .and()
-                .authorizeRequests().antMatchers("/review/**").hasAnyAuthority("USER")
+                .authorizeRequests().antMatchers("/review/**").hasAnyAuthority("USER", "ADMIN")
                 .and()
                 .authorizeRequests().antMatchers("/user/**").permitAll()
                 .anyRequest().authenticated()
