@@ -48,6 +48,8 @@ public class SecurityConfiguration {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/review/all").permitAll()
                 .and()
+                .authorizeRequests().antMatchers("/review/delete").hasAnyAuthority("ADMIN")
+                .and()
                 .authorizeRequests().antMatchers("/review/**").hasAnyAuthority("USER", "ADMIN")
                 .and()
                 .authorizeRequests().antMatchers("/user/**").permitAll()

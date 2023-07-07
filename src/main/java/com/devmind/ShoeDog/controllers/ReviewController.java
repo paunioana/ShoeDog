@@ -42,10 +42,12 @@ public class ReviewController {
                 .body(reviewService.getAllReviews());
     }
 
-    @GetMapping("/delete")
+    @DeleteMapping("/delete")
     @CrossOrigin
-    public ResponseEntity<?> deleteReview(@RequestParam Long reviewId) {
-        return reviewService.deleteReview(reviewId);
+    public ResponseEntity<?> deleteReview(@RequestParam String reviewId) {
+        System.out.println(reviewId);
+        return ResponseEntity.ok()
+                .body(reviewService.deleteReview(Long.parseLong(reviewId)));
     }
 
 
