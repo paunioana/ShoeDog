@@ -1,6 +1,5 @@
 package com.devmind.ShoeDog.models;
 
-
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
@@ -29,6 +28,7 @@ public class Product {
     @JsonBackReference
     private Set<Review> productReviews;
 
+    private Boolean approved;
 
 
 }

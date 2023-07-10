@@ -11,4 +11,6 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     List<Review> findByOrderByProductModel();
     Optional<Review> findReviewById(Long id);
     Optional<Review> deleteReviewById(Long id);
+
+    List<Review> findReviewsByUserEmail(String email);
 }
