@@ -81,7 +81,7 @@ public class UserService {
     public UserDetailsResponseDTO getUserDetails(String email) {
         User user = userRepository.findUserByEmail(email).orElseThrow();
         Integer no_reviews = reviewRepository.countByUserEmail(email);
-        UserDetailsResponseDTO dto = new UserDetailsResponseDTO(user.getEmail(), user.getFirstName(), user.getLastName(), no_reviews, user.getAbout());
+        UserDetailsResponseDTO dto = new UserDetailsResponseDTO(user.getEmail(), user.getFirstName(), user.getLastName(), no_reviews, user.getAbout(), user.getProfile_url());
         return dto;
     }
 
@@ -92,8 +92,9 @@ public class UserService {
         user.setFirstName(userDetailsRequestDTO.getFirstName());
         user.setLastName(userDetailsRequestDTO.getLastName());
         user.setAbout(userDetailsRequestDTO.getAbout());
+        user.setProfile_url(userDetailsRequestDTO.getProfile_url());
         userRepository.save(user);
-        UserDetailsResponseDTO dto = new UserDetailsResponseDTO(user.getEmail(), user.getFirstName(), user.getLastName(), no_reviews, user.getAbout());
+        UserDetailsResponseDTO dto = new UserDetailsResponseDTO(user.getEmail(), user.getFirstName(), user.getLastName(), no_reviews, user.getAbout(), user.getProfile_url());
         return dto;
     }
 }

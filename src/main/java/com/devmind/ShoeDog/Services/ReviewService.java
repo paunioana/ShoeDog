@@ -37,9 +37,8 @@ public class ReviewService {
         return brandRepository.findByOrderByName();
     }
 
-    public ResponseEntity<?> getProductsByBrand(Long brandId) {
-        return ResponseEntity.ok()
-                .body(productRepository.findAllByBrandIdAndApprovedOrderByModel(brandId, true));
+    public List<Product> getProductsByBrand(Long brandId) {
+        return productRepository.findAllByBrandIdAndApprovedOrderByModel(brandId, true);
     }
 
 
@@ -59,14 +58,14 @@ public class ReviewService {
     }
 
     @Transactional
-    public ResponseEntity<?>  addReview(ReviewRequestDTO reviewRequestDTO, String email) {
+    public String addReview(ReviewRequestDTO reviewRequestDTO, String email) {
         User user = userRepository.findUserByEmail(email).orElseThrow();
         System.out.println(user);
         Product repo_product = productRepository.findProductById(reviewRequestDTO.getProduct()).orElseThrow();
 
         Review review = new Review(null,repo_product, user,reviewRequestDTO.getReview_content(), reviewRequestDTO.getPurchase_place(), reviewRequestDTO.getRating(), new Date());
         reviewRepository.save(review);
-        return ResponseEntity.ok("Review added successfully!");
+        return "Review added successfully!";
     }
 
 }

@@ -3,6 +3,7 @@ package com.devmind.ShoeDog.dtos;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 @Getter
 @Setter
@@ -15,4 +16,6 @@ public class UserDetailsRequestDTO {
     private String lastName;
 
     private String about;
+
+    private String profile_url;
 }

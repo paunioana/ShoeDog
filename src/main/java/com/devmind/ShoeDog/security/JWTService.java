@@ -15,8 +15,8 @@ public class JWTService {
     @Value("${jwt.secret}")
     private String jwtSecret;
 
-    @Value("7200000")
-    private int jwtExpirationMs;
+    @Value("14400")
+    private int jwtExpirationS;
 
     @Value("${jwt.cookieName}")
     private String jwtCookie;
@@ -41,7 +41,7 @@ public class JWTService {
                 //.setPayload(user.getEmail())
                 .setSubject(user.getEmail())
                 .setIssuedAt(new Date())
-                .setExpiration(new Date((new Date()).getTime() + jwtExpirationMs))
+                .setExpiration(new Date((new Date()).getTime() + jwtExpirationS*1000))
                 .signWith(SignatureAlgorithm.HS512, jwtSecret)
                 .compact();
     }

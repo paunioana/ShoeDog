@@ -23,7 +23,7 @@ public class ProductService {
     private ProductRepository productRepository;
 
     @Transactional
-    public ResponseEntity<?> addProduct(ProductRequestDTO productRequestDTO, String role) {
+    public String addProduct(ProductRequestDTO productRequestDTO, String role) {
         Boolean approved = (role.equals("ADMIN") ? true : false);
         Optional<Product> repo_product = productRepository.findProductByModelAndBrandId(productRequestDTO.getModel(), productRequestDTO.getBrand());
         if(repo_product.isEmpty()) {
@@ -31,9 +31,9 @@ public class ProductService {
             Product p = new Product(null, productRequestDTO.getModel(), productRequestDTO.getYear(), b, null, approved);
             productRepository.save(p);
             if(approved) {
-                return ResponseEntity.ok("Product added successfully!");
+                return "Product added successfully!";
             } else {
-                return ResponseEntity.ok("Product added successfully and waiting approval!");
+                return "Product added successfully and waiting approval!";
             }
         } else throw new RuntimeException("Product already exists!");
 
@@ -52,10 +52,9 @@ public class ProductService {
     }
 
     @Transactional
-    public ResponseEntity<?> deleteProduct(Long id) {
+    public Optional<Product> deleteProduct(Long id) {
         Product p = productRepository.findProductById(id).orElseThrow();
-        return ResponseEntity.ok()
-                .body(productRepository.deleteProductById(id));
+        return productRepository.deleteProductById(id);
     }
 
 }

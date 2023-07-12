@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.Set;
@@ -29,6 +30,7 @@ public class User {
 
     private String lastName;
     private String about;
+
     @JsonIgnore
     @ToString.Exclude
     private String password;
@@ -36,9 +38,16 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    private String profile_url;
+
+
     @OneToMany(mappedBy = "user")
     @JsonBackReference
     private Set<Review> user_reviews;
+
+    public void setProfile_url(String profile_url) {
+        this.profile_url = profile_url;
+    }
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;

@@ -32,7 +32,8 @@ public class AdminController {
     @PostMapping("/approveProduct")
     @CrossOrigin
     public ResponseEntity<?> approveProduct(@RequestParam String id) {
-        return productService.approveProduct(Long.parseLong(id));
+        return ResponseEntity.ok()
+                .body(productService.approveProduct(Long.parseLong(id)));
     }
 
     @GetMapping("/requests")

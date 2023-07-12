@@ -26,17 +26,20 @@ public class ReviewController {
     @GetMapping("/products")
     @CrossOrigin
     public ResponseEntity<?> getProductsByBrand(@RequestParam Long brandId) {
-        return reviewService.getProductsByBrand(brandId);
+        return ResponseEntity.ok()
+                .body(reviewService.getProductsByBrand(brandId));
     }
     @PostMapping("/addModel")
     @CrossOrigin
     public ResponseEntity<?> addModel(@RequestBody ProductRequestDTO productRequestDTO, @RequestParam String role) {
-        return productService.addProduct(productRequestDTO, role);
+        return ResponseEntity.ok()
+                .body(productService.addProduct(productRequestDTO, role));
     }
     @PostMapping("/addReview")
     @CrossOrigin
     public ResponseEntity<?> addReview(@RequestBody ReviewRequestDTO reviewRequestDTO, @RequestParam String email) {
-        return reviewService.addReview(reviewRequestDTO, email);
+        return ResponseEntity.ok()
+                .body(reviewService.addReview(reviewRequestDTO, email));
     }
 
     @GetMapping("/all")
