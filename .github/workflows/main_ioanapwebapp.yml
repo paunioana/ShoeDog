@@ -52,4 +52,4 @@ jobs:
           app-name: 'ioanapwebapp'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_B03C575465F14D5F957DAC019712B4D5 }}
-          package: '*.war'
+          package: '*.jar'
