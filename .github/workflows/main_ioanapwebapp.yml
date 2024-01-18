@@ -3,6 +3,8 @@
 
 name: Build and deploy WAR app to Azure Web App - ioanapwebapp
 
+env:
+    SD_TOKEN: ${{ secrets.SD_TOKEN }}
 on:
   push:
     branches:
@@ -23,8 +25,6 @@ jobs:
 
       - name: Build with Maven
         run: mvn clean install
-        env:
-          SD_TOKEN: ${{ secrets.SD_TOKEN }}
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
