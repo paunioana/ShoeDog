@@ -4,7 +4,7 @@
 name: Build and deploy WAR app to Azure Web App - ioanapwebapp
 
 env:
-    SD_TOKEN: ${{ secrets.SD_TOKEN }}
+    APP_CONFIGURATION_CONNECTION_STRING: ${{ secrets.SD_TOKEN }}
 on:
   push:
     branches:
